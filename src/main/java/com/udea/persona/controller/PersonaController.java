@@ -53,7 +53,12 @@ public class PersonaController {
 
     @PutMapping("/list/{id}/update")
     public Persona update(@PathVariable("id") int id, @RequestBody Persona persona) {
-        return personaService.update(persona);
+        Optional<Persona> p = personaService.listId(id);
+        if (p.isPresent()) {
+            persona.setIdPerson(p.get().getIdPerson());
+            personaService.update(persona);
+        }
+        return persona;
     }
 
     @DeleteMapping("/list/{id}/delete")

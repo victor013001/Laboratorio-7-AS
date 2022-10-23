@@ -13,7 +13,7 @@ public class PersonaService {
     @Autowired
     //Ya tiene todos los datos gracias a la notacion
     private IPersonaDAO dao;
-
+    
     public Persona save(Persona p) {return dao.save(p);}
     public Persona update(Persona p) {return dao.save(p);}
     public void delete(Persona p) {dao.delete(p);}
