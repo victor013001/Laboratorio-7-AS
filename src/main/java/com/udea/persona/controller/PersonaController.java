@@ -3,11 +3,14 @@ package com.udea.persona.controller;
 import com.udea.persona.exception.ModelNotFoundException;
 import com.udea.persona.model.Persona;
 import com.udea.persona.service.PersonaService;
+
+import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -59,5 +62,25 @@ public class PersonaController {
         if (persona.isPresent()) {
             personaService.delete(persona.get());
         }
+    }
+
+    @PatchMapping("/list/{id}/patch")
+    public Persona patch(@PathVariable("id") int id) {
+        Optional<Persona> persona = personaService.listId(id);
+        if (persona.isPresent()) {
+            Persona p = persona.get();
+            int salario = (int) (p.getSalario() + (p.getSalario()*0.10)); 
+            Date fechaActual = new Date();
+            Date fechaIngreso = p.getFechaIngreso();
+            long dias = (fechaActual.getTime() - fechaIngreso.getTime())/(1000 * 60 * 60 * 24);
+            if (dias > 730) {
+                p.setSalario(salario);
+                personaService.patch(p);
+            }
+
+            return p;
+        }
+
+        throw new ModelNotFoundException("ID de persona invalido");
     }
 }

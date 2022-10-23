@@ -17,6 +17,7 @@ public class PersonaService {
     public Persona save(Persona p) {return dao.save(p);}
     public Persona update(Persona p) {return dao.save(p);}
     public void delete(Persona p) {dao.delete(p);}
+    public Persona patch(Persona p) {return dao.save(p);}
     public Iterable<Persona> list() {return dao.findAll();}
     public Optional<Persona> listId(long id){return dao.findById(id);}
 }
