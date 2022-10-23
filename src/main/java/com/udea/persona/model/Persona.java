@@ -1,6 +1,8 @@
 package com.udea.persona.model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,4 +37,22 @@ public class Persona implements Serializable {
 
     @Column(name = "email", nullable = false, length = 80)
     private @NonNull String email;
+
+    @Column(name = "salario", nullable = false, length = 10)
+    private @NonNull int salario;
+
+    @Column(name = "cargo", nullable = false, length = 80)
+    private @NonNull String cargo;
+
+    @Column(name = "direccion", nullable = false, length = 80)
+    private @NonNull String direccion;
+
+    @Column(name = "oficina", nullable = false, length = 80)
+    private @NonNull String oficina;
+
+    @Column(name = "dependencia", nullable = false, length = 80)
+    private @NonNull String dependencia;
+
+    @Column(name = "fechaIngreso", nullable = false, length = 80)
+    private @NonNull Date fechaIngreso;
 }
