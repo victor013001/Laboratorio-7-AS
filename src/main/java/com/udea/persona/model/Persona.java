@@ -55,4 +55,5 @@ public class Persona implements Serializable {
 
     @Column(name = "fechaIngreso", nullable = false, length = 80)
     private @NonNull Date fechaIngreso;
+    
 }
